@@ -30,9 +30,6 @@ count
 #1200   39 
 
 
-#------------------------------------------------------------------------------------------------
-
-#Question (a)
 
 #The M-score calculated using beneish model helps in predicting the manipulations 
 #Using beneish model to calculate mscore using formula below
@@ -79,9 +76,7 @@ precision
 #0.09512195
 #Precision with 9% serves as a bad model. Will further look into improvisng the model.
 
-#-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-#Question(b)
 #As there is imbalance in the instances for the column c.manipulator, if we build a model using this data, we will experience accuracy paradox. 
 #This is a situation where the the data is so biased towards one class( here, class 'No') that everytime a a new instance is added, irrespective of the actual result, it will result to the majority class
 #as the accuracy is high it is very likely to predict one class regardless of the data it is asked to predict.
@@ -91,9 +86,7 @@ precision
 #SMOTE (Synthetic Minority Over-sampling Technique), is a technique of 'oversampling' the minority class in a classification problem
 #Or, we can run ensemble methods over the unbalanced data and predict the performance. Ensemble methods like random forest can be used as it handled data with high bias. XGBoost is another method. 
 #for our analysis, We are starting to work on SMOTE and XGBoost method and see how it performs as compared to the other models that we will be building. 
-#------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-#Question (c)
 
 #Removing the two columns mscore and actual_manipulator as it is not required for further analysis
 mnc_complete$mscore<-NULL
@@ -186,9 +179,7 @@ summary(lm_first_sam)
 #Predictor: Manipulator=NO
 #p=exp(b(x))/1+exp(b(x))
 
-#------------------------------------------------------------------------------------------------------------------------------------------
 
-#Question (d)
 
 
 summary(lm_first_sam)
@@ -311,9 +302,7 @@ table101_sam
 # 9  0.5514350 0.15740741 0.8717949
 # 10 0.4566147 0.17751479 0.7692308
 
-#-------------------------------------------------------------------------------------------------------------
 
-#Question (e)
 #Youden's index
 #Formula = max {sensitivity(p) - specificity(p) -1}
 
@@ -409,9 +398,7 @@ TP1/(TP1+FN1)
 #Precision
 TP1/(TP1+FP1)
 #18.9% Precision
-#-----------------------------------------------------------------------------------------------------------------------------------------------
 
-#Question (f)
 
 #Logistic regression model built on the best youden's index and the least cost based method gives the following results: 
 Final_Evaluation[2,]
@@ -428,9 +415,7 @@ Final_Evaluation[2,]
 #AQI+DSRI+GMI+SGI+ACCR
 mscore<-(-4.84) + (0.92*mnc_complete$DSRI) + (0.528*mnc_complete$GMI) + (0.404*mnc_complete$AQI) + (0.892*mnc_complete$SGI)(4.679*mnc_complete$ACCR)
 
-#-----------------------------------------------------------------------------------------------------------------------------------------------
 
-#Question (g)
 
 #AS we saw above, the distribution of the variable is unbalanced, so we will need to balance the data
 #by using the concept of OverSampling
@@ -550,9 +535,7 @@ conf2$byClass
 #Recall: 42.85%
 
 #From these two deciion trees we see the second model has a better accuracy and sensitivity which is our mai focus for analysing the earning manipulation
-#------------------------------------------------------------------------------------------------------------------------
 
-#Question 1 (h)
 
 #Now let's create a logistic regression model using the complete dataset
 mnc_complete$Company.ID<-NULL
@@ -795,9 +778,7 @@ confusion_imp14$byClass
 #Sensitivity = 30%
 #Precision = 63%
 
-#--------------------------------------------------------------------------------------
 
-#Question(i)
 install.packages("randomForest")
 library(randomForest)
 
@@ -883,9 +864,7 @@ plot(err.test$error, type = "l", ylim = c(0,1), col = "red", lwd = 2)
 lines(err.train$error, cex = 0.5, col = "blue", lty = 2, lwd = 2)
 
 
-#----------------------------------------------------------------------------------------
 
-#Question (i)
 #Taking all the metrics into one table
 View(Final_Evaluation)
 Final_Evaluation<-data.frame(Model=character(), Accuracy = numeric(), Precision=numeric(), Recall=numeric(),stringsAsFactors=FALSE)
